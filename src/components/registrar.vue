@@ -79,9 +79,9 @@
               required
             >
               <option value="" disabled>Seleccione un rol</option>
-              <option value="user">Tecnico</option>
+              <option value="tecnico">Tecnico</option>
               <option value="admin">Admin</option>
-              <option value="superadmin">Cliente</option>
+              <option value="cliente">Cliente</option>
             </select>
           </div>
         </div>
