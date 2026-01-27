@@ -60,9 +60,10 @@ function submit() {
   border: 1px solid #eee;
   border-radius: 8px;
   background: #fff;
+  color: black;
 }
 .login label { display:block; margin-bottom:4px; font-weight:600 }
-.login input { width:100%; padding:8px; margin-bottom:12px; box-sizing:border-box }
+.login input { width:100%; padding:8px; margin-bottom:12px; box-sizing:border-box; background-color: white; color:black }
 .login .actions { text-align:right }
 .error { color: #b00020; margin-top:8px }
 .hint { color:#666; font-size:0.9rem }
