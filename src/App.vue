@@ -1,5 +1,5 @@
 <script setup>
-import Registrar from './components/registrar.vue'
+import Registrar from './components/Login.vue'
 </script>
 
 <template>
