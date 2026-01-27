@@ -294,6 +294,7 @@ select {
   font-size: 14px;
   transition: border-color 0.3s;
   box-sizing: border-box;
+  background-color: white;
 }
 
 input:focus,
@@ -304,7 +305,8 @@ select:focus {
 
 select {
   cursor: pointer;
-  background-color: rgb(233, 236, 230);
+  color: black;
+  background-color: white;
 }
 
 .btn-submit {
