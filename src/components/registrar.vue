@@ -295,18 +295,20 @@ select {
   transition: border-color 0.3s;
   box-sizing: border-box;
   background-color: white;
+  color: black;
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: #a8edea;
+  color: black;
 }
 
 select {
   cursor: pointer;
-  color: black;
-  background-color: white;
+  background-color: rgb(233, 236, 230);
+  color:black
 }
 
 .btn-submit {
