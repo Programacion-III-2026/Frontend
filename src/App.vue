@@ -1,62 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
-import Login from './components/Login.vue'
-
-const token = ref(localStorage.getItem('auth_token') || '')
-const user = ref(localStorage.getItem('auth_email') || '')
-
-function handleLogin(payload) {
-  user.value = payload.email
-  token.value = payload.token
-  localStorage.setItem('auth_token', payload.token)
-  localStorage.setItem('auth_email', payload.email)
-}
-
-function logout() {
-  token.value = ''
-  user.value = ''
-  localStorage.removeItem('auth_token')
-  localStorage.removeItem('auth_user')
-}
+import Registrar from './components/registrar.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-
-    <main>
-      <div v-if="!token">
-        <Login @login="handleLogin" />
-      </div>
-
-      <div v-else>
-        <header style="display:flex; align-items:center; justify-content:space-between; max-width:880px; margin:1rem auto;">
-          <div>Bienvenido, <strong>{{ user }}</strong></div>
-          <div><button @click="logout">Cerrar sesión</button></div>
-        </header>
-        <HelloWorld msg="Vite + Vue (área protegida)" />
-      </div>
-    </main>
-  </div>
+  <Registrar />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-attachment: fixed;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #a1c4fd 50%, #c2e9fb 75%, #fbc2eb 100%);
+
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #d81717aa);
+
+#app {
+  width: 100%;
+  min-height: 100vh;
 }
 </style>
