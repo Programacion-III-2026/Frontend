@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -60,10 +62,26 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.app-content h2,
+.app-content h3,
+.app-content h4 {
+  margin-left: 0.25rem;
+}
+
+.app-content h2.text-2xl {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.app-content h2.text-2xl + p.text-gray-600 {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
 }
 
 @media (prefers-color-scheme: light) {

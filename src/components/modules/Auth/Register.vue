@@ -199,390 +199,218 @@ function volver() {
               value="Cliente"
               disabled
             />
-            <small class="rol-hint">El rol inicial es cliente y queda en estado pendiente.</small>
           </div>
         </div>
 
-        <el-button 
-          type="primary" 
-          size="large"
-          class="btn-submit"
-          @click="registrarUsuario"
-          :loading="loading"
-        >
-          <i class="el-icon-circle-check mr-2"></i>Registrar
-        </el-button>
+        <div v-if="mensaje" :class="['mensaje', esError ? 'error' : 'exito']">
+          {{ mensaje }}
+        </div>
+
+        <div class="button-group">
+          <el-button type="primary" native-type="submit" :loading="loading">
+            <i class="el-icon-check mr-2"></i>Registrarse
+          </el-button>
+          <el-button @click="volver">
+            <i class="el-icon-arrow-left mr-2"></i>Volver
+          </el-button>
+        </div>
       </form>
 
-      <div v-if="mensaje" class="mensaje" :class="{ 'error': esError }">
-        {{ mensaje }}
+      <div class="info-box">
+        <p><strong>ℹ️ Información importante:</strong></p>
+        <ul>
+          <li>✓ Completa todos los campos</li>
+          <li>✓ Tu cuenta será verificada por un administrador</li>
+          <li>✓ Recibirás un correo cuando sea aprobada</li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-  }
-</style>
 
 <style scoped>
-  
 .registro-container {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  width: 100vw;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #a1c4fd 50%, #c2e9fb 75%, #fbc2eb 100%);
-  background-attachment: fixed;
-  margin: 0%;
+  background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 50%, #dbeafe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
-/* User Icons Decoration */
 .user-icon {
   position: absolute;
-  opacity: 0.15;
-  color: #ffffff;
-  animation: float 6s ease-in-out infinite;
+  opacity: 0.1;
+  color: #a78bfa;
+  z-index: 0;
 }
 
-.user-icon svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-}
-
-.user-icon-1 {
-  width: 80px;
-  height: 80px;
-  top: 10%;
-  left: 8%;
-  animation-delay: 0s;
-}
-
-.user-icon-2 {
-  width: 100px;
-  height: 100px;
-  top: 70%;
-  left: 12%;
-  animation-delay: 1s;
-}
-
-.user-icon-3 {
-  width: 90px;
-  height: 90px;
-  top: 15%;
-  right: 10%;
-  animation-delay: 2s;
-}
-
-.user-icon-4 {
-  width: 70px;
-  height: 70px;
-  top: 65%;
-  right: 15%;
-  animation-delay: 3s;
-}
-
-.user-icon-5 {
-  width: 85px;
-  height: 85px;
-  top: 40%;
-  left: 5%;
-  animation-delay: 4s;
-}
-
-.user-icon-6 {
-  width: 95px;
-  height: 95px;
-  top: 45%;
-  right: 8%;
-  animation-delay: 5s;
-}
+.user-icon-1 { top: 10%; left: 5%; width: 100px; height: 100px; }
+.user-icon-2 { top: 20%; right: 10%; width: 120px; height: 120px; animation: float 6s ease-in-out infinite; }
+.user-icon-3 { bottom: 20%; left: 10%; width: 90px; height: 90px; }
+.user-icon-4 { bottom: 15%; right: 5%; width: 110px; height: 110px; animation: float 8s ease-in-out infinite; }
+.user-icon-5 { top: 40%; left: 2%; width: 80px; height: 80px; }
+.user-icon-6 { top: 60%; right: 3%; width: 95px; height: 95px; animation: float 7s ease-in-out infinite; }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-15px) rotate(5deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(-5deg);
-  }
-  75% {
-    transform: translateY(-20px) rotate(3deg);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
 .registro-card {
-  position: relative;
-  z-index: 10;
-  background: linear-gradient(138deg, #ffffff 0%, #ffeef8 25%, #e0f4ff 50%, #fff5e6 75%, #f0f0ff 100%);
+  background: white;
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
   width: 100%;
-  max-width: 900px;
+  max-width: 500px;
+  z-index: 10;
+  position: relative;
+  border: 1px solid rgba(199, 210, 254, 0.3);
 }
 
 .back-button-container {
   margin-bottom: 20px;
-  display: flex;
-  justify-content: flex-start;
 }
 
 h2 {
   text-align: center;
-  color: #333;
+  color: #4c1d95;
   margin-bottom: 30px;
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .form-group {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  display: block;
   margin-bottom: 8px;
-  color: #555;
-  font-weight: 500;
+  color: #6b21a8;
+  font-weight: 600;
   font-size: 14px;
-}
-
-.rol-hint {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: #666;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #000;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  box-sizing: border-box;
-  background-color: white;
-  color: black;
 }
 
 .form-input {
-  border: 2px solid #000 !important;
+  padding: 12px;
+  border: 2px solid #e9d5ff;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background-color: #faf5ff;
 }
 
-input:focus,
-select:focus {
+.form-input:focus {
   outline: none;
-  border-color: #409EFF !important;
-  box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.2);
-  color: black;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1);
+  background-color: white;
+  transform: translateY(-1px);
 }
 
-select {
-  cursor: pointer;
-  background-color: rgb(233, 236, 230);
-  color: black;
-}
-
-.btn-submit {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #333;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-top: 10px;
-}
-
-.btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(168, 237, 234, 0.5);
-}
-
-.btn-submit:active {
-  transform: translateY(0);
+.form-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
 }
 
 .mensaje {
-  margin-top: 20px;
   padding: 12px;
-  border-radius: 6px;
+  border-radius: 5px;
+  margin-bottom: 15px;
   text-align: center;
-  font-size: 14px;
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  font-weight: 600;
+}
+
+.mensaje.exito {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  border-radius: 10px;
 }
 
 .mensaje.error {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  border-radius: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .registro-card {
-    max-width: 700px;
-    padding: 35px;
-  }
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
 
+:deep(.el-button) {
+  flex: 1;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+:deep(.el-button--primary) {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+:deep(.el-button--primary:hover) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.info-box {
+  margin-top: 30px;
+  padding: 15px;
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  border-left: 4px solid #8b5cf6;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #4c1d95;
+}
+
+.info-box p {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.info-box ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.info-box li {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
   .form-row {
-    gap: 15px;
+    grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 768px) {
-  .registro-container {
-    padding: 15px;
-    min-height: 100vh;
-  }
-
+  
   .registro-card {
-    padding: 30px 25px;
-    max-width: 100%;
+    padding: 30px 20px;
   }
-
-  h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
-  }
-
-  .form-row {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .form-group {
-    margin-bottom: 18px;
-    width: 100%;
-  }
-
-  label {
-    font-size: 13px;
-  }
-
-  input,
-  select {
-    padding: 10px;
-    font-size: 13px;
-    width: 100%;
-  }
-
-  .btn-submit {
-    padding: 12px;
-    font-size: 15px;
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .registro-container {
-    padding: 10px;
-  }
-
-  .registro-card {
-    padding: 25px 20px;
-    border-radius: 8px;
-  }
-
-  h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-  label {
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-
-  input,
-  select {
-    padding: 10px;
-    font-size: 12px;
-  }
-
-  .btn-submit {
-    padding: 11px;
-    font-size: 14px;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .mensaje {
-    padding: 10px;
-    font-size: 13px;
-    margin-top: 15px;
-  }
-}
-
-@media (max-width: 360px) {
-  .registro-card {
-    padding: 20px 15px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  input,
-  select {
-    padding: 9px;
-    font-size: 11px;
-  }
-
-  .btn-submit {
-    padding: 10px;
-    font-size: 13px;
-  }
-
-  .form-group {
-    margin-bottom: 12px;
-  }
-}
-
-/* Orientación horizontal en móviles */
-@media (max-height: 600px) and (orientation: landscape) {
-  .registro-container {
-    min-height: auto;
-    padding: 15px 20px;
-  }
-
-  .registro-card {
-    margin: 15px auto;
-    padding: 20px;
-  }
-
-  h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-
-  .form-group {
-    margin-bottom: 12px;
+  
+  .user-icon {
+    display: none;
   }
 }
 </style>

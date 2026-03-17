@@ -4,10 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario Registro </title>
+    <title>IBM Sistema</title>
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      (() => {
+        const iconFrames = ['/vite.svg', '/favicon-glow.svg']
+        let currentIcon = 0
+
+        const faviconLink =
+          document.querySelector("link[rel='icon']") ||
+          document.querySelector("link[rel='shortcut icon']") ||
+          (() => {
+            const link = document.createElement('link')
+            link.rel = 'icon'
+            link.type = 'image/svg+xml'
+            document.head.appendChild(link)
+            return link
+          })()
+
+        setInterval(() => {
+          currentIcon = (currentIcon + 1) % iconFrames.length
+          faviconLink.href = iconFrames[currentIcon]
+        }, 700)
+      })()
+    </script>
     <script type="module" src="/src/main.js"></script>
     
   
